@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>电子商务专升本四班</title>
+  <style>
+    /* 基础样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #f8f5f0;
+      color: #3a3226;
+      line-height: 1.6;
+    }
+    
+    .container {
+      width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* 导航栏 */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #f8f5f0;
+      border-bottom: 1px solid #d9c9b8;
+      padding: 20px 0;
+      z-index: 100;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #8b4513;
+      text-decoration: none;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+    
+    nav a {
+      color: #3a3226;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+    
+    nav a:hover, nav a.active {
+      color: #8b4513;
+    }
+    
+    /* 面包屑导航 */
+    .breadcrumbs {
+      padding: 100px 0 10px;
+      font-size: 14px;
+      color: #795548;
+    }
+    
+    .breadcrumbs a {
+      color: #795548;
+      text-decoration: none;
+    }
+    
+    .breadcrumbs a:hover {
+      text-decoration: underline;
+    }
+    
+    .breadcrumbs span {
+      margin: 0 8px;
+    }
+    
+    /* 页面标题 */
+    .page-title {
+      font-size: 36px;
+      margin: 20px 0 40px;
+      color: #5d4037;
+    }
+    
+    /* 分类区 */
+    .categories {
+      padding-bottom: 60px;
+    }
+    
+    .category-section {
+      margin-bottom: 60px;
+    }
+    
+    .category-title {
+      font-size: 24px;
+      margin-bottom: 25px;
+      color: #5d4037;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #d9c9b8;
+    }
+    
+    .books-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+    
+    .category-book {
+      display: flex;
+      gap: 20px;
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    
+    .category-book img {
+      width: 120px;
+      height: 180px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    
+    .book-info h3 {
+      font-size: 18px;
+      margin-bottom: 5px;
+      color: #5d4037;
+    }
+    
+    .book-info .author {
+      font-size: 14px;
+      color: #795548;
+      margin-bottom: 10px;
+    }
+    
+    .book-info .desc {
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    
+    .book-info .year {
+      font-size: 13px;
+      color: #795548;
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+    
+    .book-info a {
+      color: #8b4513;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    
+    .book-info a:hover {
+      text-decoration: underline;
+    }
+    
+    /* 字体图标模拟 */
+    .icon {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      position: relative;
+      top: 0.1em;
+    }
+    
+    .icon-category::before {
+      content: "📖";
+    }
+    /* 页脚样式 */
+footer {
+  background-color: #3a3226;
+  color: #d9c9b8;
+  padding: 50px 0 30px;
+  margin-top: 60px;
+}
+
+.footer-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-columns {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #d4a373;
+  margin-bottom: 15px;
+  font-family: 'Georgia', serif;
+}
+
+.footer-title {
+  font-size: 18px;
+  color: #f8f5f0;
+  margin-bottom: 15px;
+  font-family: 'Georgia', serif;
+}
+
+.footer-desc {
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #d9c9b8;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: #d4a373;
+}
+
+.footer-contact {
+  list-style: none;
+}
+
+.footer-contact li {
+  margin-bottom: 12px;
+  font-size: 14px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.footer-contact .icon {
+  margin-right: 10px;
+  color: #d4a373;
+  margin-top: 3px;
+}
+
+.footer-follow {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-color: #5d4037;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  color: #f8f5f0;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.social-icon:hover {
+  background-color: #d4a373;
+}
+
+.footer-bottom {
+  padding-top: 20px;
+  border-top: 1px solid #5d4037;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.copyright {
+  color: #9e8a76;
+}
+
+.footer-policy {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-policy a {
+  color: #9e8a76;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-policy a:hover {
+  color: #d4a373;
+}
+
+/* 页脚图标补充 */
+.icon-location::before {
+  content: "📍";
+}
+
+.icon-phone::before {
+  content: "📞";
+}
+
+.icon-email::before {
+  content: "✉️";
+}
+
+.icon-time::before {
+  content: "⏰";
+}
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <header>
+    <div class="container nav-container">
+      <a href="index.html" class="logo">书海</a>
+      <nav>
+        <ul>
+          <li><a href="index.html">首页</a></li>
+          <li><a href="categories.html" class="active">藏书分类</a></li>
+          <li><a href="#">收藏指南</a></li>
+          <li><a href="#">关于收藏</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 面包屑导航 -->
+  <div class="container">
+    <div class="breadcrumbs">
+      <a href="index.html">首页</a>
+      <span>›</span>
+      <span>藏书分类</span>
+    </div>
+  </div>
+
+  <!-- 主要内容区 -->
+  <section class="categories">
+    <div class="container">
+      <h1 class="page-title"><span class="icon icon-category"></span> 藏书分类</h1>
+      
+      <!-- 儒家经典类 -->
+      <div id="confucian" class="category-section">
+        <h2 class="category-title">儒家经典</h2>
+        <div class="books-list">
+          <div class="category-book">
+            <img src="./image/论语古注本.jpg" alt="论语古注本">
+            <div class="book-info">
+              <h3>论语古注本</h3>
+              <p class="author">孔子及其弟子 著 / 清代批注</p>
+              <p class="year">清乾隆年间刻本</p>
+              <p class="desc">
+                收录了郑玄、何晏、朱熹等历代学者对《论语》的注解，采用特制竹纸印刷，朱墨套印，批注清晰，保存完好。
+              </p>
+              <a href="book-detail.html">查看详细介绍</a>
+            </div>
+          </div>
+          
+          <div class="category-book">
+            <img src="./image/孟子集注.jpg" alt="孟子集注">
+            <div class="book-info">
+              <h3>孟子集注</h3>
+              <p class="author">孟子 著 / 朱熹 集注</p>
+              <p class="year">明万历年间刻本</p>
+              <p class="desc">
+                朱熹经典注释本，版式疏朗，刻工精良，是研究宋明理学的重要文献，书中附有精美版画插图。
+              </p>
+              <a href="#">查看详细介绍</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 文学类 -->
+      <div id="literature" class="category-section">
+        <h2 class="category-title">文学作品</h2>
+        <div class="books-list">
+          <div class="category-book">
+            <img src="./image/唐诗三百首.png" alt="唐诗选集">
+            <div class="book-info">
+              <h3>唐诗三百首</h3>
+              <p class="author">蘅塘退士 编选</p>
+              <p class="year">民国二十三年商务印书馆影印本</p>
+              <p class="desc">
+                收录唐诗三百余首，保留了原刻本的精美版画插图，纸张为特制宣纸，印刷清晰，是古典文学爱好者的珍藏之选。
+              </p>
+              <a href="#">查看详细介绍</a>
+            </div>
+          </div>
+          
+          <div class="category-book">
+            <img src="./image/hlm.webp" alt="红楼梦抄本">
+            <div class="book-info">
+              <h3>红楼梦抄本</h3>
+              <p class="author">曹雪芹 著</p>
+              <p class="year">清乾隆年间抄本</p>
+              <p class="desc">
+                脂砚斋评点本，保留了许多今本未见的段落，是研究《红楼梦》的重要版本，抄写字迹工整，用纸考究。
+              </p>
+              <a href="#">查看详细介绍</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 科技类 -->
+      <div id="science" class="category-section">
+        <h2 class="category-title">科技著作</h2>
+        <div class="books-list">
+          <div class="category-book">
+            <img src="./image/天工开物.png" alt="天工开物">
+            <div class="book-info">
+              <h3>天工开物</h3>
+              <p class="author">宋应星 著</p>
+              <p class="year">明崇祯十年初刻本</p>
+              <p class="desc">
+                中国古代科技百科全书，详细记载了农业、手工业技术，书中附有大量精美插图，此为初刻本，存世稀少。
+              </p>
+              <a href="#">查看详细介绍</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- 页脚 -->
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-columns">
+        <div class="footer-column">
+          <h3 class="footer-logo">书海</h3>
+          <p class="footer-desc">
+            致力于古典书籍的收藏、保护与分享，让珍贵的文化遗产得以传承，
+            为古籍爱好者提供交流与学习的平台。
+          </p>
+        </div>
+        
+        <div class="footer-column">
+          <h4 class="footer-title">快速导航</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="categories.html">藏书分类</a></li>
+            <li><a href="#">收藏指南</a></li>
+            <li><a href="#">关于收藏</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4 class="footer-title">联系我们</h4>
+          <ul class="footer-contact">
+            <li><span class="icon icon-location"></span> 文化街古籍收藏馆</li>
+            <li><span class="icon icon-phone"></span> (010) 8765-4321</li>
+            <li><span class="icon icon-email"></span> contact@shuhai.com</li>
+            <li><span class="icon icon-time"></span> 开放时间: 9:00-17:00 (周一闭馆)</li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4 class="footer-title">关注我们</h4>
+          <p class="footer-follow">获取最新收藏资讯与活动信息</p>
+          <div class="social-links">
+            <a href="#" class="social-icon">📱</a>
+            <a href="#" class="social-icon">📘</a>
+            <a href="#" class="social-icon">📷</a>
+            <a href="#" class="social-icon">🐦</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="copyright">© 2023 书海古籍收藏馆 版权所有 | 电子商务专升本四班</p>
+        <div class="footer-policy">
+          <a href="#">隐私政策</a> | <a href="#">使用条款</a> | <a href="#">网站地图</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
